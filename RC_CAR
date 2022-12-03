@@ -1,0 +1,65 @@
+#include <Arduino.h>
+
+// Pin definitions
+const int leftMotorPin = 9;  // Pin for controlling the left motor
+const int rightMotorPin = 10; // Pin for controlling the right motor
+const int leftDirectionPin = 8;  // Pin for controlling the direction of the left motor
+const int rightDirectionPin = 7; // Pin for controlling the direction of the right motor
+
+void setup()
+{
+  // Set the left and right motor pins as output pins
+  pinMode(leftMotorPin, OUTPUT);
+  pinMode(rightMotorPin, OUTPUT);
+
+  // Set the left and right direction pins as output pins
+  pinMode(leftDirectionPin, OUTPUT);
+  pinMode(rightDirectionPin, OUTPUT);
+}
+
+void loop()
+{
+  // Read the value of the remote control's left joystick
+  int leftJoystickValue = analogRead(0);
+
+  // Read the value of the remote control's right joystick
+  int rightJoystickValue = analogRead(1);
+
+  // If the left joystick is moved to the left
+  if (leftJoystickValue < 512)
+  {
+    // Set the left motor to run in reverse
+    digitalWrite(leftDirectionPin, HIGH);
+
+    // Set the speed of the left motor
+    analogWrite(leftMotorPin, leftJoystickValue);
+  }
+  // If the left joystick is moved to the right
+  else if (leftJoystickValue > 512)
+  {
+    // Set the left motor to run forward
+    digitalWrite(leftDirectionPin, LOW);
+
+    // Set the speed of the left motor
+    analogWrite(leftMotorPin, 1023 - leftJoystickValue);
+  }
+
+  // If the right joystick is moved to the left
+  if (rightJoystickValue < 512)
+  {
+    // Set the right motor to run in reverse
+    digitalWrite(rightDirectionPin, HIGH);
+
+    // Set the speed of the right motor
+    analogWrite(rightMotorPin, rightJoystickValue);
+  }
+  // If the right joystick is moved to the right
+  else if (rightJoystickValue > 512)
+  {
+    // Set the right motor to run forward
+    digitalWrite(rightDirectionPin, LOW);
+
+    // Set the speed of the right motor
+    analogWrite(rightMotorPin, 1023 - rightJoystickValue);
+  }
+}

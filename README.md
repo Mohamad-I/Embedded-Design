@@ -1,7 +1,7 @@
 # Embedded-Design
 Embedded system projects
 
-PURPOSE: TO configure the software in C to remotely navigate the RC CAR using an Ardunino 
+PURPOSE: To configure the software in C to remotely navigate the RC CAR using an Ardunino 
 
 Notes: 
 This script uses the analogRead() and analogWrite() functions to read the values of
